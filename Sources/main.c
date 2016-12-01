@@ -6,48 +6,57 @@
 #include "derivative.h" /* include peripheral declarations */
 #include "UART0.h"
 #include "PWM.h"
+#include "GPIO.h"
+
+#define HIGH	1
+#define LOW 	0
 
 typedef struct 
 {
-	U08 waistAngle;
-	U08 shoulderAngle;
-	U08 elbowAngle;
-	U08 wristAngle;
-	U08 gripperAngle;
-}_sArmsAngle;
+	U08 leftPower;
+	U08 leftAtenuation;
+	U08 rightPower;
+	U08 rightAtenuation;
+}_sMotorsPower;
 
 typedef struct 
 {
 	U08 SOF;
-	U08 servo;
-	U08 dir;
-	U08 angle;
+	U08 leftPower;
+	U08 leftDir;	
+	U08 rightPower;
+	U08 rightDir;
 	U08 chksm;
 }_sMessage;
 
-_sArmsAngle spArm;
+_sMotorsPower spMotors;
 _sMessage newMessage;
 _sMessage ansMessage;
 U08 ans[4];
 U08 tmpData;
 
 void vfnSetClk48MHZ(void);
-void vfnUpdateArmsPosition(void);
+void vfnUpdateMotorPower(void);
 U16 wfnMaps(U16 wX, U16 wInMin, U16 wInMax, U16 wOutMin, U16 wOutMax);
+void vfnGpiosConfiguration(void);
+void turnOff(void);
+void vfnSetDirMotor(U08 bMotor, U08 bDir);
+
+int i;
 
 int main(void)
 {
 	vfnSetClk48MHZ();
+	vfnGpiosConfiguration();
 	vfnInitUart0(115200);
 	vfnInitPWM();
 	/*hombro*/
-	spArm.waistAngle = 0;
-	/*Cintura*/
-	spArm.wristAngle = 170;
-	/*garra*/
-	spArm.shoulderAngle = 130;
+	
 
-	vfnUpdateArmsPosition();
+	vfnSetDirMotor(LEFTMOTOR, BACKWARD);
+	vfnSetDirMotor(RIGHTMOTOR, FORWARD);
+	vfnUpdateMotorPower();
+	turnOff();
 	
 	for(;;) 
 	{	   
@@ -55,154 +64,21 @@ int main(void)
 		if(msgRcvFlag == 1)
 		{
 			/*actualiza angulos correspondientes*/
-			newMessage.dir   = buffer[1];
-			newMessage.servo = buffer[2];
-			newMessage.angle  = buffer[3];
-			newMessage.chksm = buffer[4];
+			newMessage.leftPower   	= buffer[1];
+			newMessage.leftDir     	= buffer[2];
+			newMessage.rightPower   = buffer[3];
+			newMessage.rightDir   	= buffer[4];
 			
-			switch (newMessage.servo)
-			{
-				case WAIST:{					
+			vfnSetDirMotor(LEFTMOTOR, newMessage.leftDir);
+			vfnSetDirMotor(RIGHTMOTOR, newMessage.rightDir);
+			spMotors.leftPower = newMessage.leftPower;
+			spMotors.rightPower = newMessage.rightPower;
+			vfnUpdateMotorPower();
+			/*10ms*/
+			for(i=0;i<480000;i++);
 
-						if(newMessage.dir == FORWARD)
-						{
-							if((spArm.waistAngle + newMessage.angle) > 180)
-							{
-								/*do nothing*/
-							}
-							else
-							{
-								/*add angle*/
-								spArm.waistAngle += newMessage.angle;
-							}
-						}
-						else
-						{	
-							if(((spArm.waistAngle - newMessage.angle) < 5) || ((spArm.waistAngle - newMessage.angle) > 180))
-							{
-								/*do nothing*/
-							}
-							else
-							{
-								/*substract angle*/
-								spArm.waistAngle -= newMessage.angle;
-							}
-						}
-				}break;
-				
-				case ELBOW:{
-					if(newMessage.dir == FORWARD)
-					{
-						if((spArm.elbowAngle + newMessage.angle) > 180)
-						{
-							/*do nothing*/
-						}
-						else
-						{
-							/*add angle*/
-							spArm.elbowAngle += newMessage.angle;
-						}
-					}
-					else
-					{	
-						if(((spArm.elbowAngle - newMessage.angle) < 5) || ((spArm.elbowAngle - newMessage.angle) > 180))
-						{
-							/*do nothing*/
-						}
-						else
-						{
-							/*substract angle*/
-							spArm.elbowAngle -= newMessage.angle;
-						}
-					}	
-				}break;
-				
-				case SHOULDER:{
-					if(newMessage.dir == FORWARD)
-					{
-						if((spArm.shoulderAngle + newMessage.angle) > 180)
-						{
-							/*do nothing*/
-						}
-						else
-						{
-							/*add angle*/
-							spArm.shoulderAngle += newMessage.angle;
-						}
-					}
-					else
-					{	
-						if(((spArm.shoulderAngle - newMessage.angle) < 5) || ((spArm.shoulderAngle - newMessage.angle) > 180))
-						{
-							/*do nothing*/
-						}
-						else
-						{
-							/*substract angle*/
-							spArm.shoulderAngle -= newMessage.angle;
-						}
-					}
-									
-				}break;
-				
-				case WRIST:{
-					if(newMessage.dir == FORWARD)
-					{
-						if((spArm.wristAngle + newMessage.angle) > 180)
-						{
-							/*do nothing*/
-						}
-						else
-						{
-							/*add angle*/
-							spArm.wristAngle += newMessage.angle;
-						}
-					}
-					else
-					{	
-						if(((spArm.wristAngle - newMessage.angle) < 5) || ((spArm.wristAngle - newMessage.angle) > 180))
-						{
-							/*do nothing*/
-						}
-						else
-						{
-							/*substract angle*/
-							spArm.wristAngle -= newMessage.angle;
-						}
-					}
-									
-				}break;
-				case GRIPPER:{
-					if(newMessage.dir == FORWARD)
-					{
-						if((spArm.gripperAngle + newMessage.angle) > 180)
-						{
-							/*do nothing*/
-						}
-						else
-						{
-							/*add angle*/
-							spArm.gripperAngle += newMessage.angle;
-						}
-					}
-					else
-					{	
-						if(((spArm.gripperAngle - newMessage.angle) < 5) || ((spArm.gripperAngle - newMessage.angle) > 180))
-						{
-							/*do nothing*/
-						}
-						else
-						{
-							/*substract angle*/
-							spArm.gripperAngle -= newMessage.angle;
-						}
-					}
-									
-				}break;
-			}
-			/*Responder al servidor*/
 			msgRcvFlag = 0;
-			vfnUpdateArmsPosition();
+			turnOff();
 			//UART0_vfnSendMessage((U08 *)ans, 4);
 		}
 
@@ -211,13 +87,10 @@ int main(void)
 	return 0;
 }
 
-void vfnUpdateArmsPosition(void)
+void vfnUpdateMotorPower(void)
 {//8520
-	vfnSetPosition(WAIST,wfnMaps(spArm.waistAngle,0,180,4700,12200));
-	vfnSetPosition(SHOULDER,wfnMaps(spArm.shoulderAngle,0,180,1000,4200));
-	vfnSetPosition(ELBOW,wfnMaps(spArm.elbowAngle,0,180,1850,7200));
-	vfnSetPosition(WRIST,wfnMaps(spArm.wristAngle,0,180,1850,6200));
-	vfnSetPosition(GRIPPER,wfnMaps(spArm.gripperAngle,0,180,1850,7200));
+	vfnSetMotorPower(LEFTMOTOR,wfnMaps(spMotors.leftPower,0,100,6000,60000));
+	vfnSetMotorPower(RIGHTMOTOR,wfnMaps(spMotors.rightPower,0,100,6000,60000));
 }
 
 U16 wfnMaps(U16 wX, U16 wInMin, U16 wInMax, U16 wOutMin, U16 wOutMax)
@@ -244,5 +117,72 @@ void vfnSetClk48MHZ(void)
    /* Wait until FLL output is stable */
    while(MCG_S & MCG_S_CLKST_MASK);
    
+}
+
+void vfnGpiosConfiguration(void)
+{
+	GPIO_ENABLE_MODULE_CLOCK(PORTB);
+	/*LEFT MOTOR DIRECTION
+		EN3 EN4
+		0 	0 = stop
+		0 	1 = F
+		1 	0 = B
+	*/
+	GPIO_CONFIG_PIN_FUNCTION(B,0,GPIO);
+	GPIO_CONFIG_PIN_FUNCTION(B,1,GPIO);
+	/*RIGHT MOTOR DIRECTION*/
+	GPIO_CONFIG_PIN_FUNCTION(B,2,GPIO);
+	GPIO_CONFIG_PIN_FUNCTION(B,3,GPIO);
+	
+	GPIO_CONFIG_PIN_AS_OUTPUT(B,0);
+	GPIO_CONFIG_PIN_AS_OUTPUT(B,1);
+	GPIO_CONFIG_PIN_AS_OUTPUT(B,2);
+	GPIO_CONFIG_PIN_AS_OUTPUT(B,3);
+	
+	GPIO_WRITE_PIN(B,0,LOW);
+	GPIO_WRITE_PIN(B,1,LOW);
+	GPIO_WRITE_PIN(B,2,LOW);
+	GPIO_WRITE_PIN(B,3,LOW);
+}
+
+void turnOff(void)
+{
+	vfnSetMotorPower(LEFTMOTOR, 0);
+	vfnSetMotorPower(RIGHTMOTOR, 0);
+	GPIO_WRITE_PIN(B,0,LOW);
+	GPIO_WRITE_PIN(B,1,LOW);
+	GPIO_WRITE_PIN(B,2,LOW);
+	GPIO_WRITE_PIN(B,3,LOW);
+}
+
+void vfnSetDirMotor(U08 bMotor, U08 bDir)
+{
+	if(bMotor == LEFTMOTOR)
+	{
+		if(bDir == FORWARD)
+		{
+			GPIO_WRITE_PIN(B,0,LOW);
+			GPIO_WRITE_PIN(B,1,HIGH);			
+		}
+		else
+		{
+			GPIO_WRITE_PIN(B,0,HIGH);
+			GPIO_WRITE_PIN(B,1,LOW);
+		}
+	}
+	else
+	{
+		if(bDir == FORWARD)
+		{
+			GPIO_WRITE_PIN(B,2,HIGH);
+			GPIO_WRITE_PIN(B,3,LOW);
+		}
+		else
+		{
+			GPIO_WRITE_PIN(B,2,LOW);
+			GPIO_WRITE_PIN(B,3,HIGH);
+		}
+
+	}
 }
 

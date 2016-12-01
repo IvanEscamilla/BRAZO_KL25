@@ -6,25 +6,18 @@
 #include "UART0.h"
 
 U16 Index = 0;
-U08 buffer[4];
+U08 buffer[6];
 U08 msgRcvFlag;
 U08 chksm;
 
 void vfnInitUart0(U32 dwBaudRate)
 {
 	 SIM_SCGC4 |= SIM_SCGC4_UART0_MASK;    
-	// SIM_SCGC5 |= SIM_SCGC5_PORTD_MASK;
-	 /* PORTA_PCR1: ISF=0,MUX=2 */
-	 //PORTD_PCR6 = PORT_PCR_MUX(0x3);
-	 //PORTA_PCR1 |= (1<<24);
-	 /* PORTA_PCR2: ISF=0,MUX=2 */
-	// PORTD_PCR7 = PORT_PCR_MUX(0x3);
-	 SIM_SCGC5 |= SIM_SCGC5_PORTA_MASK ;//| SIM_SCGC5_PORTC_MASK | SIM_SCGC5_PORTB_MASK;
-	 /* PORTA_PCR1: ISF=0,MUX=2 */
-	 PORTA_PCR1 = PORT_PCR_MUX(0x2);
-	 //PORTA_PCR1 |= (1<<24);
-	 /* PORTA_PCR2: ISF=0,MUX=2 */
-	 PORTA_PCR2 = PORT_PCR_MUX(0x2);
+	 SIM_SCGC5 |= SIM_SCGC5_PORTE_MASK ;
+	 /*TX PORTE_PCR20: ISF=0,MUX=4 */
+	 PORTE_PCR20 = PORT_PCR_MUX(0x4);
+	 /*RX PORTE_PCR21: ISF=0,MUX=4 */
+	 PORTE_PCR21 = PORT_PCR_MUX(0x4);
 	 /* Disable TX & RX while we configure settings */
 	 UART0_C2 &= ~(UART0_C2_TE_MASK); //disable transmitter
 	 UART0_C2 &= ~(UART0_C2_RE_MASK); //disable receiver
@@ -149,11 +142,11 @@ void UART0_ISR()
     
 	buffer[Index++] = UART0_D;
 	
-	if(Index == 5)
+	if(Index == 6)
 	{
 		Index = 0;
 		
-		if(chksm == buffer[4])
+		if(chksm == buffer[5])
 		{
 			msgRcvFlag = 1;
 			chksm = 0;

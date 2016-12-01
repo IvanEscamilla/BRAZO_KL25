@@ -11,24 +11,13 @@
 /*************************************************************************************************/
 /*********************						Defines							**********************/
 /*************************************************************************************************/
-#define WAIST 		0
-#define SHOULDER	1
-#define ELBOW 		2
-#define WRIST 		3
-#define GRIPPER 	4
-/*custom positions*/
-#define INITIALPOS	4
-#define ALLUP 		5
-#define ANGLED 		6
-#define FORWARD	 	0
-#define BACKWARD	1
+#define LEFTMOTOR 		0
+#define RIGHTMOTOR		1
+#define FORWARD	 		0
+#define BACKWARD		1
 
-#define WAISTVAL(x) 		TPM0_C0V = TPM_CnV_VAL(x);
-#define SHOULDERVAL(x)		TPM0_C1V = TPM_CnV_VAL(x);
-#define ELBOWVAL(x) 		TPM0_C2V = TPM_CnV_VAL(x);
-#define WRISTVAL(x) 		TPM0_C3V = TPM_CnV_VAL(x);
-#define GRIPPERVAL(x)		TPM1_C0V = TPM_CnV_VAL(x);
-
+#define SETPOWERLEFTMOTOR(x) 		TPM0_C0V = TPM_CnV_VAL(x);
+#define SETPOWERRIGHTMOTOR(x)		TPM0_C1V = TPM_CnV_VAL(x);
 
 typedef enum
 {
@@ -67,5 +56,5 @@ typedef enum
 /*************************************************************************************************/
 
 void vfnInitPWM(void);
-void vfnSetPosition(U08 servo, U16 angle);
+void vfnSetMotorPower(U08 bMotor, U16 wPower);
 #endif /* PWM_H_ */

@@ -21,7 +21,6 @@ extern void __thumb_startup(void);
 #if __cplusplus
 }
 #endif
-extern void UART0_ISR();
 
 /**
  **===========================================================================
@@ -83,6 +82,7 @@ void MCG_IRQHandler() __attribute__ ((weak, alias("Default_Handler")));
 void LPTimer_IRQHandler() __attribute__ ((weak, alias("Default_Handler")));
 void PORTA_IRQHandler() __attribute__ ((weak, alias("Default_Handler")));
 void PORTD_IRQHandler() __attribute__ ((weak, alias("Default_Handler")));
+extern void UART0_ISR();
 
 /* The Interrupt Vector Table */
 void (* const InterruptVector[])() __attribute__ ((section(".vectortable"))) = {
