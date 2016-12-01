@@ -18,24 +18,16 @@ typedef struct
 
 typedef struct 
 {
-	U08 dir;
+	U08 SOF;
 	U08 servo;
+	U08 dir;
 	U08 angle;
 	U08 chksm;
 }_sMessage;
 
-typedef struct 
-{
-	U08 arm;
-	U08 dir;
-	U08 cmd;
-	U08 angle;
-}_sActions;
-
 _sArmsAngle spArm;
 _sMessage newMessage;
 _sMessage ansMessage;
-_sActions rcvInfo;
 U08 ans[4];
 U08 tmpData;
 
@@ -48,12 +40,13 @@ int main(void)
 	vfnSetClk48MHZ();
 	vfnInitUart0(115200);
 	vfnInitPWM();
+	/*hombro*/
 	spArm.waistAngle = 0;
-	spArm.elbowAngle = 25;
-	spArm.gripperAngle = 50;
-	spArm.shoulderAngle = 75;
-	spArm.wristAngle = 180;
-	
+	/*Cintura*/
+	spArm.wristAngle = 170;
+	/*garra*/
+	spArm.shoulderAngle = 130;
+
 	vfnUpdateArmsPosition();
 	
 	for(;;) 
@@ -62,8 +55,8 @@ int main(void)
 		if(msgRcvFlag == 1)
 		{
 			/*actualiza angulos correspondientes*/
-			newMessage.dir   = buffer[0];
-			newMessage.servo = buffer[1];
+			newMessage.dir   = buffer[1];
+			newMessage.servo = buffer[2];
 			newMessage.angle  = buffer[3];
 			newMessage.chksm = buffer[4];
 			
@@ -92,7 +85,7 @@ int main(void)
 							else
 							{
 								/*substract angle*/
-								spArm.waistAngle -= rcvInfo.angle;
+								spArm.waistAngle -= newMessage.angle;
 							}
 						}
 				}break;
@@ -119,7 +112,7 @@ int main(void)
 						else
 						{
 							/*substract angle*/
-							spArm.elbowAngle -= rcvInfo.angle;
+							spArm.elbowAngle -= newMessage.angle;
 						}
 					}	
 				}break;
@@ -146,7 +139,7 @@ int main(void)
 						else
 						{
 							/*substract angle*/
-							spArm.shoulderAngle -= rcvInfo.angle;
+							spArm.shoulderAngle -= newMessage.angle;
 						}
 					}
 									
@@ -174,7 +167,7 @@ int main(void)
 						else
 						{
 							/*substract angle*/
-							spArm.wristAngle -= rcvInfo.angle;
+							spArm.wristAngle -= newMessage.angle;
 						}
 					}
 									
@@ -201,7 +194,7 @@ int main(void)
 						else
 						{
 							/*substract angle*/
-							spArm.gripperAngle -= rcvInfo.angle;
+							spArm.gripperAngle -= newMessage.angle;
 						}
 					}
 									
@@ -220,10 +213,10 @@ int main(void)
 
 void vfnUpdateArmsPosition(void)
 {//8520
-	vfnSetPosition(WAIST,wfnMaps(spArm.waistAngle,0,180,1850,7200));
-	vfnSetPosition(SHOULDER,wfnMaps(spArm.shoulderAngle,0,180,1850,7200));
+	vfnSetPosition(WAIST,wfnMaps(spArm.waistAngle,0,180,4700,12200));
+	vfnSetPosition(SHOULDER,wfnMaps(spArm.shoulderAngle,0,180,1000,4200));
 	vfnSetPosition(ELBOW,wfnMaps(spArm.elbowAngle,0,180,1850,7200));
-	vfnSetPosition(WRIST,wfnMaps(spArm.wristAngle,0,180,1850,7200));
+	vfnSetPosition(WRIST,wfnMaps(spArm.wristAngle,0,180,1850,6200));
 	vfnSetPosition(GRIPPER,wfnMaps(spArm.gripperAngle,0,180,1850,7200));
 }
 

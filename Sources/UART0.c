@@ -149,11 +149,11 @@ void UART0_ISR()
     
 	buffer[Index++] = UART0_D;
 	
-	if(Index == 4)
+	if(Index == 5)
 	{
 		Index = 0;
 		
-		if(chksm == buffer[3])
+		if(chksm == buffer[4])
 		{
 			msgRcvFlag = 1;
 			chksm = 0;
