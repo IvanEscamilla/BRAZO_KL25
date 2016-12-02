@@ -75,10 +75,10 @@ int main(void)
 			spMotors.rightPower = newMessage.rightPower;
 			vfnUpdateMotorPower();
 			/*10ms*/
-			for(i=0;i<480000;i++);
+			//for(i=0;i<40000;i++);
 
 			msgRcvFlag = 0;
-			turnOff();
+			//turnOff();
 			//UART0_vfnSendMessage((U08 *)ans, 4);
 		}
 
