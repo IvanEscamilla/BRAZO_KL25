@@ -1,0 +1,37 @@
+/*
+ * LEDS.c
+ *
+ *  Created on: Dec 7, 2016
+ *      Author: Luis Ivan Escamilla
+ */
+
+#include "LEDS.h"
+
+void vfnIntLeds(){
+	
+	/*Enables the Port Clocks*/
+	GPIO_ENABLE_MODULE_CLOCK(PORTB);
+	GPIO_ENABLE_MODULE_CLOCK(PORTD);
+	
+	/*Configure Pin Mux Function*/
+	GPIO_CONFIG_PIN_FUNCTION(B,18,GPIO);
+	GPIO_CONFIG_PIN_FUNCTION(B,19,GPIO);
+	GPIO_CONFIG_PIN_FUNCTION(D,1,GPIO);
+	
+	/*Set as Output*/
+	GPIO_CONFIG_PIN_AS_OUTPUT(B,18);
+	GPIO_CONFIG_PIN_AS_OUTPUT(B,19);
+	GPIO_CONFIG_PIN_AS_OUTPUT(D,1);
+	
+	/*Init values*/
+	GPIO_WRITE_PIN(B,18,HIGH);
+	GPIO_WRITE_PIN(B,19,HIGH);
+	GPIO_WRITE_PIN(D,1,HIGH);
+
+}
+
+void vfnSetRGB(U08 R, U08 G, U08 B){
+	FGPIO_WRITE_PIN(B,18,!R);
+	FGPIO_WRITE_PIN(B,19,!G);
+	FGPIO_WRITE_PIN(D,1,!B);
+}

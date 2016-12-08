@@ -7,6 +7,7 @@
 #include "UART0.h"
 #include "PWM.h"
 #include "GPIO.h"
+#include "LEDS.h"
 
 #define HIGH	1
 #define LOW 	0
@@ -45,6 +46,7 @@ void vfnSetDirMotor(U08 bMotor, U08 bDir);
 int i;
 
 int main(void)
+
 {
 	vfnSetClk48MHZ();
 	vfnGpiosConfiguration();
@@ -57,12 +59,13 @@ int main(void)
 	vfnSetDirMotor(RIGHTMOTOR, FORWARD);
 	vfnUpdateMotorPower();
 	turnOff();
-	
+	vfnSetRGB(LOW,HIGH,LOW);
 	for(;;) 
 	{	   
 				
 		if(msgRcvFlag == 1)
 		{
+			vfnSetRGB(HIGH,LOW,LOW);
 			/*actualiza angulos correspondientes*/
 			newMessage.leftPower   	= buffer[1];
 			newMessage.leftDir     	= buffer[2];
@@ -74,12 +77,10 @@ int main(void)
 			spMotors.leftPower = newMessage.leftPower;
 			spMotors.rightPower = newMessage.rightPower;
 			vfnUpdateMotorPower();
-			/*10ms*/
-			//for(i=0;i<40000;i++);
 
 			msgRcvFlag = 0;
-			//turnOff();
 			//UART0_vfnSendMessage((U08 *)ans, 4);
+			vfnSetRGB(LOW,HIGH,LOW);
 		}
 
 	}
@@ -89,8 +90,6 @@ int main(void)
 
 void vfnUpdateMotorPower(void)
 {//8520
-	vfnSetMotorPower(LEFTMOTOR,wfnMaps(spMotors.leftPower,0,100,6000,60000));
-	vfnSetMotorPower(RIGHTMOTOR,wfnMaps(spMotors.rightPower,0,100,6000,60000));
 }
 
 U16 wfnMaps(U16 wX, U16 wInMin, U16 wInMax, U16 wOutMin, U16 wOutMax)
@@ -143,6 +142,8 @@ void vfnGpiosConfiguration(void)
 	GPIO_WRITE_PIN(B,1,LOW);
 	GPIO_WRITE_PIN(B,2,LOW);
 	GPIO_WRITE_PIN(B,3,LOW);
+	
+	vfnIntLeds();
 }
 
 void turnOff(void)

@@ -20,6 +20,14 @@
     #define FALSE                       (0)
 #endif
 
+#ifndef HIGH
+    #define HIGH                        (1)
+#endif
+
+#ifndef LOW
+    #define LOW                         (0)
+#endif
+
 #ifndef NULL
   #define NULL          (void*)0
 #endif

@@ -6,6 +6,7 @@
 "./Sources/main.o"
 "./Sources/UART0.o"
 "./Sources/PWM.o"
+"./Sources/LEDS.o"
 -mcpu=cortex-m0
 -mthumb
 -mfloat-abi=soft

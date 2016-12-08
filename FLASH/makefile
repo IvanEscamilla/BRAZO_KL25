@@ -2,7 +2,7 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
-#Progress monitor hint: 8
+#Progress monitor hint: 9
 first : all
 -include ../makefile.init
 
@@ -59,7 +59,7 @@ all: warning-messages explicit-dependencies brazo.elf secondary-outputs
 # Tool invocations
 brazo.elf: $(OBJS) $(USER_OBJS) ../Project_Settings/Linker_Files/MKL25Z128_flash.ld
 	@echo 'Building target: $@'
-	@echo 'Executing target #9 $@'
+	@echo 'Executing target #10 $@'
 	@echo 'Invoking: ARM Ltd Windows GCC C Linker'
 	"$(ARMSourceryDirEnv)/arm-none-eabi-gcc"  $(USER_OBJS_QUOTED) $(LIBS_QUOTED) @"brazo.args" -o"brazo.elf"
 	@echo 'Finished building target: $@'
