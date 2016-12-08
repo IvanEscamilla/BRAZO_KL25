@@ -90,6 +90,8 @@ int main(void)
 
 void vfnUpdateMotorPower(void)
 {//8520
+	vfnSetMotorPower(LEFTMOTOR,wfnMaps(spMotors.leftPower,0,100,4000,30000));
+	vfnSetMotorPower(RIGHTMOTOR,wfnMaps(spMotors.rightPower,0,100,4000,30000));
 }
 
 U16 wfnMaps(U16 wX, U16 wInMin, U16 wInMax, U16 wOutMin, U16 wOutMax)
