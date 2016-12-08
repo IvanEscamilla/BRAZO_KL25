@@ -40,12 +40,10 @@ int main(void)
 	vfnSetClk48MHZ();
 	vfnInitUart0(115200);
 	vfnInitPWM();
-	/*hombro*/
+	/*cintura*/
 	spArm.waistAngle = 0;
-	/*Cintura*/
-	spArm.wristAngle = 170;
-	/*garra*/
-	spArm.shoulderAngle = 130;
+	/*hombro*/
+	spArm.shoulderAngle = 90;
 
 	vfnUpdateArmsPosition();
 	
@@ -212,8 +210,8 @@ int main(void)
 }
 
 void vfnUpdateArmsPosition(void)
-{//8520
-	vfnSetPosition(WAIST,wfnMaps(spArm.waistAngle,0,180,4700,12200));
+{//8520 4700 12000
+	vfnSetPosition(WAIST,wfnMaps(spArm.waistAngle,0,180,2200,7000));
 	vfnSetPosition(SHOULDER,wfnMaps(spArm.shoulderAngle,0,180,1000,4200));
 	vfnSetPosition(ELBOW,wfnMaps(spArm.elbowAngle,0,180,1850,7200));
 	vfnSetPosition(WRIST,wfnMaps(spArm.wristAngle,0,180,1850,6200));

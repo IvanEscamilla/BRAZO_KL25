@@ -23,8 +23,8 @@
 #define FORWARD	 	0
 #define BACKWARD	1
 
-#define WAISTVAL(x) 		TPM0_C0V = TPM_CnV_VAL(x);
-#define SHOULDERVAL(x)		TPM0_C1V = TPM_CnV_VAL(x);
+#define WAISTVAL(x) 		TPM0_C0V = TPM_CnV_VAL(x);//C1
+#define SHOULDERVAL(x)		TPM0_C1V = TPM_CnV_VAL(x);//C2
 #define ELBOWVAL(x) 		TPM0_C2V = TPM_CnV_VAL(x);
 #define WRISTVAL(x) 		TPM0_C3V = TPM_CnV_VAL(x);
 #define GRIPPERVAL(x)		TPM1_C0V = TPM_CnV_VAL(x);

@@ -162,7 +162,7 @@ END GROUP
  *(.cfmconfig)
                 0x00000400                . = ALIGN (0x4)
 
-.text           0x00000800      0xc60
+.text           0x00000800      0xc58
                 0x00000800                . = ALIGN (0x4)
  *(.text)
  .text          0x00000800       0x9c c:/freescale/cw mcu v10.7/cross_tools/arm-none-eabi-gcc-4_7_3/bin/../lib/gcc/arm-none-eabi/4.7.3/armv6-m\libgcc.a(_udivsi3.o)
@@ -226,62 +226,62 @@ END GROUP
  .text._ExitProcess
                 0x000009ec        0xc ./Project_Settings/Startup_Code/__arm_end.o
                 0x000009ec                _ExitProcess
- .text.main     0x000009f8      0x27c ./Sources/main.o
+ .text.main     0x000009f8      0x274 ./Sources/main.o
                 0x000009f8                main
  .text.vfnUpdateArmsPosition
-                0x00000c74       0xc8 ./Sources/main.o
-                0x00000c74                vfnUpdateArmsPosition
- .text.wfnMaps  0x00000d3c       0x60 ./Sources/main.o
-                0x00000d3c                wfnMaps
+                0x00000c6c       0xc8 ./Sources/main.o
+                0x00000c6c                vfnUpdateArmsPosition
+ .text.wfnMaps  0x00000d34       0x60 ./Sources/main.o
+                0x00000d34                wfnMaps
  .text.vfnSetClk48MHZ
-                0x00000d9c       0x78 ./Sources/main.o
-                0x00000d9c                vfnSetClk48MHZ
+                0x00000d94       0x78 ./Sources/main.o
+                0x00000d94                vfnSetClk48MHZ
  .text.vfnInitUart0
-                0x00000e14      0x17c ./Sources/UART0.o
-                0x00000e14                vfnInitUart0
+                0x00000e0c      0x17c ./Sources/UART0.o
+                0x00000e0c                vfnInitUart0
  .text.UART0_ISR
-                0x00000f90       0xbc ./Sources/UART0.o
-                0x00000f90                UART0_ISR
+                0x00000f88       0xbc ./Sources/UART0.o
+                0x00000f88                UART0_ISR
  .text.vfnInitPWM
-                0x0000104c      0x18c ./Sources/PWM.o
-                0x0000104c                vfnInitPWM
+                0x00001044      0x18c ./Sources/PWM.o
+                0x00001044                vfnInitPWM
  .text.vfnSetPosition
-                0x000011d8       0x68 ./Sources/PWM.o
-                0x000011d8                vfnSetPosition
- .text.exit     0x00001240       0x38 C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(exit.o)
-                0x00001240                exit
- .text.memset   0x00001278        0xc C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memset.o)
-                0x00001278                memset
+                0x000011d0       0x68 ./Sources/PWM.o
+                0x000011d0                vfnSetPosition
+ .text.exit     0x00001238       0x38 C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(exit.o)
+                0x00001238                exit
+ .text.memset   0x00001270        0xc C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memset.o)
+                0x00001270                memset
  .text.__fill_mem
-                0x00001284       0x7e C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(__filll_mem.o)
-                0x00001284                __fill_mem
- *fill*         0x00001302        0x2 00
+                0x0000127c       0x7e C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(__filll_mem.o)
+                0x0000127c                __fill_mem
+ *fill*         0x000012fa        0x2 00
  .text.__init_cpp
-                0x00001304       0x48 C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(gcc_ctor_dtor.o)
-                0x00001304                __init_cpp
+                0x000012fc       0x48 C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(gcc_ctor_dtor.o)
+                0x000012fc                __init_cpp
  .text.__fini_cpp
-                0x0000134c       0x34 C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(gcc_ctor_dtor.o)
-                0x0000134c                __fini_cpp
+                0x00001344       0x34 C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(gcc_ctor_dtor.o)
+                0x00001344                __fini_cpp
  .text.__destroy_global_chain
-                0x00001380       0x1c C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(__arm_eabi_init.o)
-                0x00001380                __destroy_global_chain
+                0x00001378       0x1c C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(__arm_eabi_init.o)
+                0x00001378                __destroy_global_chain
  .text.__init_registers
-                0x0000139c       0x1c C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(__arm_eabi_init.o)
-                0x0000139c                __init_registers
+                0x00001394       0x1c C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(__arm_eabi_init.o)
+                0x00001394                __init_registers
  .text.__init_user
-                0x000013b8        0x4 C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(__arm_eabi_init.o)
-                0x000013b8                __init_user
+                0x000013b0        0x4 C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(__arm_eabi_init.o)
+                0x000013b0                __init_user
  .text.__copy_rom_section
-                0x000013bc       0x48 C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(ROMCopy.o)
-                0x000013bc                __copy_rom_section
+                0x000013b4       0x48 C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(ROMCopy.o)
+                0x000013b4                __copy_rom_section
  .text.__copy_rom_sections_to_ram
-                0x00001404       0x34 C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(ROMCopy.o)
-                0x00001404                __copy_rom_sections_to_ram
+                0x000013fc       0x34 C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(ROMCopy.o)
+                0x000013fc                __copy_rom_sections_to_ram
  *(.rodata)
  *(.rodata*)
- .rodata.main   0x00001438       0x14 ./Sources/main.o
+ .rodata.main   0x00001430       0x14 ./Sources/main.o
  .rodata.vfnSetPosition
-                0x0000144c       0x14 ./Sources/PWM.o
+                0x00001444       0x14 ./Sources/PWM.o
  *(.glue_7)
  .glue_7        0x00000000        0x0 linker stubs
  *(.glue_7t)
@@ -289,62 +289,62 @@ END GROUP
  *(.eh_frame)
  *(.init)
  *(.fini)
-                0x00001460                . = ALIGN (0x4)
-                0x00001460                _etext = .
+                0x00001458                . = ALIGN (0x4)
+                0x00001458                _etext = .
 
-.vfp11_veneer   0x00001460        0x0
+.vfp11_veneer   0x00001458        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x00001460        0x0
+.v4_bx          0x00001458        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x00001460        0x0
+.iplt           0x00001458        0x0
  .iplt          0x00000000        0x0 ./Project_Settings/Startup_Code/kinetis_sysinit.o
 
-.rel.dyn        0x00001460        0x0
+.rel.dyn        0x00001458        0x0
  .rel.iplt      0x00000000        0x0 ./Project_Settings/Startup_Code/kinetis_sysinit.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x00001460        0x0
-                0x00001460                __exidx_start = .
+.ARM            0x00001458        0x0
+                0x00001458                __exidx_start = .
  *(.ARM.exidx*)
-                0x00001460                __exidx_end = .
+                0x00001458                __exidx_end = .
 
-.ctors          0x00001460        0x0
-                0x00001460                __CTOR_LIST__ = .
+.ctors          0x00001458        0x0
+                0x00001458                __CTOR_LIST__ = .
  *crtbegin.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o) .ctors)
  *(SORT(.ctors.*))
  *(.ctors)
-                0x00001460                __CTOR_END__ = .
+                0x00001458                __CTOR_END__ = .
 
-.dtors          0x00001460        0x0
-                0x00001460                __DTOR_LIST__ = .
+.dtors          0x00001458        0x0
+                0x00001458                __DTOR_LIST__ = .
  *crtbegin.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o) .dtors)
  *(SORT(.dtors.*))
  *(.dtors)
-                0x00001460                __DTOR_END__ = .
+                0x00001458                __DTOR_END__ = .
 
-.preinit_array  0x00001460        0x0
-                0x00001460                PROVIDE (__preinit_array_start, .)
+.preinit_array  0x00001458        0x0
+                0x00001458                PROVIDE (__preinit_array_start, .)
  *(.preinit_array*)
-                0x00001460                PROVIDE (__preinit_array_end, .)
+                0x00001458                PROVIDE (__preinit_array_end, .)
 
-.init_array     0x00001460        0x0
-                0x00001460                PROVIDE (__init_array_start, .)
+.init_array     0x00001458        0x0
+                0x00001458                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*))
  *(.init_array*)
-                0x00001460                PROVIDE (__init_array_end, .)
+                0x00001458                PROVIDE (__init_array_end, .)
 
-.fini_array     0x00001460        0x0
-                0x00001460                PROVIDE (__fini_array_start, .)
+.fini_array     0x00001458        0x0
+                0x00001458                PROVIDE (__fini_array_start, .)
  *(SORT(.fini_array.*))
  *(.fini_array*)
-                0x00001460                PROVIDE (__fini_array_end, .)
-                0x00001460                ___ROM_AT = .
+                0x00001458                PROVIDE (__fini_array_end, .)
+                0x00001458                ___ROM_AT = .
 
 .mtb            0x1ffff000        0x0
                 0x1ffff000                . = ALIGN (0x8)
@@ -353,7 +353,7 @@ END GROUP
                 0x1ffff000                . = ALIGN (0x8)
                 0x1ffff000                _mtb_end = .
 
-.data           0x1ffff000        0x0 load address 0x00001460
+.data           0x1ffff000        0x0 load address 0x00001458
                 0x1ffff000                . = ALIGN (0x4)
                 0x1ffff000                _sdata = .
  *(.data)
@@ -400,11 +400,11 @@ END GROUP
  *fill*         0x1ffff045        0x3 00
                 0x1ffff048                __END_BSS = .
                 0x1ffff048                PROVIDE (__bss_end__, __END_BSS)
-                0x00001460                _romp_at = (___ROM_AT + SIZEOF (.data))
+                0x00001458                _romp_at = (___ROM_AT + SIZEOF (.data))
 
-.romp           0x1ffff048       0x18 load address 0x00001460
-                0x00001460                __S_romp = _romp_at
-                0x1ffff048        0x4 LONG 0x1460 ___ROM_AT
+.romp           0x1ffff048       0x18 load address 0x00001458
+                0x00001458                __S_romp = _romp_at
+                0x1ffff048        0x4 LONG 0x1458 ___ROM_AT
                 0x1ffff04c        0x4 LONG 0x1ffff000 _sdata
                 0x1ffff050        0x4 LONG 0x0 ___data_size
                 0x1ffff054        0x4 LONG 0x0
@@ -412,7 +412,7 @@ END GROUP
                 0x1ffff05c        0x4 LONG 0x0
 
 ._user_heap_stack
-                0x1ffff060      0x800 load address 0x00001478
+                0x1ffff060      0x800 load address 0x00001470
                 0x1ffff060                . = ALIGN (0x4)
                 0x1ffff060                PROVIDE (end, .)
                 0x1ffff060                PROVIDE (_end, .)
@@ -540,19 +540,19 @@ OUTPUT(brazo.elf elf32-littlearm)
  .debug_macinfo
                 0x0007a3cb    0x26657 ./Sources/PWM.o
 
-.debug_line     0x00000000     0x131a
+.debug_line     0x00000000     0x1319
  .debug_line    0x00000000      0x225 ./Project_Settings/Startup_Code/kinetis_sysinit.o
  .debug_line    0x00000225      0x2a8 ./Project_Settings/Startup_Code/__arm_start.o
  .debug_line    0x000004cd      0x265 ./Project_Settings/Startup_Code/__arm_end.o
- .debug_line    0x00000732      0x2b1 ./Sources/main.o
- .debug_line    0x000009e3      0x2b4 ./Sources/UART0.o
- .debug_line    0x00000c97      0x230 ./Sources/PWM.o
- .debug_line    0x00000ec7       0x8d C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(exit.o)
- .debug_line    0x00000f54       0x90 C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memset.o)
- .debug_line    0x00000fe4       0xf6 C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(__filll_mem.o)
- .debug_line    0x000010da       0x6c C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(gcc_ctor_dtor.o)
- .debug_line    0x00001146      0x117 C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(__arm_eabi_init.o)
- .debug_line    0x0000125d       0xbd C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(ROMCopy.o)
+ .debug_line    0x00000732      0x2b0 ./Sources/main.o
+ .debug_line    0x000009e2      0x2b4 ./Sources/UART0.o
+ .debug_line    0x00000c96      0x230 ./Sources/PWM.o
+ .debug_line    0x00000ec6       0x8d C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(exit.o)
+ .debug_line    0x00000f53       0x90 C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(memset.o)
+ .debug_line    0x00000fe3       0xf6 C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\libc.a(__filll_mem.o)
+ .debug_line    0x000010d9       0x6c C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(gcc_ctor_dtor.o)
+ .debug_line    0x00001145      0x117 C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(__arm_eabi_init.o)
+ .debug_line    0x0000125c       0xbd C:/Freescale/CW MCU v10.7/MCU/ARM_GCC_Support/ewl/lib/armv6-m\librt.a(ROMCopy.o)
 
 .debug_str      0x00000000      0xa51
  .debug_str     0x00000000      0x2a6 ./Project_Settings/Startup_Code/kinetis_sysinit.o
