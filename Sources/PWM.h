@@ -25,9 +25,9 @@
 
 #define WAISTVAL(x) 		TPM0_C0V = TPM_CnV_VAL(x);//C1
 #define SHOULDERVAL(x)		TPM0_C1V = TPM_CnV_VAL(x);//C2
-#define ELBOWVAL(x) 		TPM0_C2V = TPM_CnV_VAL(x);
-#define WRISTVAL(x) 		TPM0_C3V = TPM_CnV_VAL(x);
-#define GRIPPERVAL(x)		TPM1_C0V = TPM_CnV_VAL(x);
+#define ELBOWVAL(x) 		TPM0_C2V = TPM_CnV_VAL(x);//E29
+#define WRISTVAL(x) 		TPM0_C3V = TPM_CnV_VAL(x);//E30
+#define GRIPPERVAL(x)		TPM1_C0V = TPM_CnV_VAL(x);//E20
 
 
 typedef enum
