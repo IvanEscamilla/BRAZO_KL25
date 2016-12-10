@@ -14,6 +14,8 @@ void vfnInitPWM(void)
 	SIM_SCGC6 |= SIM_SCGC6_TPM0_MASK;	//This bit controls the clock gate to the TPMx module.
 	SIM_SCGC5 |= SIM_SCGC5_PORTE_MASK;
 	SIM_SCGC5 |= SIM_SCGC5_PORTC_MASK;
+	SIM_SCGC5 |= SIM_SCGC5_PORTA_MASK;
+
 	/*
 	 * clk in -> 48Mhz
 	 * */
@@ -34,8 +36,8 @@ void vfnInitPWM(void)
 	GPIOE_PDDR |= (1<<30);
 		
 	/*GRIPPER PWM SIGNAL*/
-	PORTE_PCR20|= PORT_PCR_MUX(3);	//TPM1_CH0
-	GPIOE_PDDR |= (1<<20);
+	PORTA_PCR12|= PORT_PCR_MUX(3);	//TPM1_CH0
+	GPIOA_PDDR |= (1<<12);
 	
 	TPM1_CONF = TPM_CONF_DBGMODE(3); //Enable Debug Counting, 11 LPTPM counter continues in debug mode.
 	TPM1_SC = TPM_SC_CMOD(eLPTPM_INC) | TPM_SC_PS(eDiv_16);

@@ -11,11 +11,11 @@
 /*************************************************************************************************/
 /*********************						Defines							**********************/
 /*************************************************************************************************/
-#define WAIST 		0
-#define SHOULDER	1
-#define ELBOW 		2
-#define WRIST 		3
-#define GRIPPER 	4
+#define WAIST 		5
+#define SHOULDER	4
+#define ELBOW 		3
+#define WRIST 		2
+#define GRIPPER 	1
 /*custom positions*/
 #define INITIALPOS	4
 #define ALLUP 		5

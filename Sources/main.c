@@ -19,8 +19,8 @@ typedef struct
 typedef struct 
 {
 	U08 SOF;
-	U08 servo;
 	U08 dir;
+	U08 servo;
 	U08 angle;
 	U08 chksm;
 }_sMessage;
@@ -40,13 +40,12 @@ int main(void)
 	vfnSetClk48MHZ();
 	vfnInitUart0(115200);
 	vfnInitPWM();
-	/*cintura*/
+
 	spArm.waistAngle = 0;
-	/*hombro*/
 	spArm.shoulderAngle = 100;
-	spArm.elbowAngle = 50;
+	spArm.elbowAngle = 20;
 	spArm.wristAngle = 0;
-	spArm.gripperAngle = 180;
+	spArm.gripperAngle = 0;
 
 	vfnUpdateArmsPosition();
 	
@@ -56,8 +55,8 @@ int main(void)
 		if(msgRcvFlag == 1)
 		{
 			/*actualiza angulos correspondientes*/
-			newMessage.dir   = buffer[1];
-			newMessage.servo = buffer[2];
+			newMessage.dir   = buffer[2];
+			newMessage.servo = buffer[1];
 			newMessage.angle  = buffer[3];
 			newMessage.chksm = buffer[4];
 			

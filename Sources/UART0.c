@@ -13,18 +13,11 @@ U08 chksm;
 void vfnInitUart0(U32 dwBaudRate)
 {
 	 SIM_SCGC4 |= SIM_SCGC4_UART0_MASK;    
-	// SIM_SCGC5 |= SIM_SCGC5_PORTD_MASK;
-	 /* PORTA_PCR1: ISF=0,MUX=2 */
-	 //PORTD_PCR6 = PORT_PCR_MUX(0x3);
-	 //PORTA_PCR1 |= (1<<24);
-	 /* PORTA_PCR2: ISF=0,MUX=2 */
-	// PORTD_PCR7 = PORT_PCR_MUX(0x3);
-	 SIM_SCGC5 |= SIM_SCGC5_PORTA_MASK ;//| SIM_SCGC5_PORTC_MASK | SIM_SCGC5_PORTB_MASK;
-	 /* PORTA_PCR1: ISF=0,MUX=2 */
-	 PORTA_PCR1 = PORT_PCR_MUX(0x2);
-	 //PORTA_PCR1 |= (1<<24);
-	 /* PORTA_PCR2: ISF=0,MUX=2 */
-	 PORTA_PCR2 = PORT_PCR_MUX(0x2);
+	 SIM_SCGC5 |= SIM_SCGC5_PORTE_MASK ;
+	 /*TX PORTE_PCR20: ISF=0,MUX=4 */
+	 PORTE_PCR20 = PORT_PCR_MUX(0x4);
+	 /*RX PORTE_PCR21: ISF=0,MUX=4 */
+	 PORTE_PCR21 = PORT_PCR_MUX(0x4);
 	 /* Disable TX & RX while we configure settings */
 	 UART0_C2 &= ~(UART0_C2_TE_MASK); //disable transmitter
 	 UART0_C2 &= ~(UART0_C2_RE_MASK); //disable receiver
@@ -37,9 +30,9 @@ void vfnInitUart0(U32 dwBaudRate)
 	 UART0_S2 = 0x00; /* Set the S2 register */
 	 
 	 SIM_SOPT2 |= SIM_SOPT2_UART0SRC(1); //set clock source to be from MCGFLLCLK clock or MCGPLLCLK/2
-     SIM_SOPT2 |= SIM_SOPT2_CLKOUTSEL(0b010);
+	 SIM_SOPT2 |= SIM_SOPT2_CLKOUTSEL(0b010);
  
-     U08 OSR = 3; //set the oversampling ratio to option #3 = 4x
+	 U08 OSR = 3; //set the oversampling ratio to option #3 = 4x
 	 
 	 U16 SBR = (48000000/(OSR+1))/dwBaudRate;
 	 UART0_BDH = 0;
@@ -48,7 +41,7 @@ void vfnInitUart0(U32 dwBaudRate)
 	 UART0_BDL |= (~UART0_BDL_SBR_MASK) | SBR;	 
 	 
 	 UART0_C4 &= (~UART0_C4_OSR_MASK) | OSR;
-	 	 
+		 
 	 /*
 	 * Target Baud rate = 115200, 56600, 34800, 19200
 	 * ~21MHz
